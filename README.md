@@ -115,7 +115,9 @@ Damit die "Shelly Simulation" genutzt werden kann, muss
 a) Als "Messgeräte-Typ" der "Shelly 3EM Pro" ausgewählt werden
 b) In Feld "Messgerät-IP" die (an den Namen der eignene HA Instanz angepasste Tei-URL) z.B. "homeassistant1.local:1880/endpoint" eingetragen werden. Die CCU ergänzt dies dann zur korrekten URL für das API.
 
-**Hinweis für Nutzer des lokalen API bei Firmware 0.41beta:** 
+**Hinweis für Nutzer des lokalen API bei Firmware 0.41beta:** Jetzt kommt der "blöde" Teil - da es derzeit keine Möglichkeit gibt, lokal eine URL einzupflegen, wird bei zurückschalten auf das lokale API
+wieder einer der aufgelisteten Shellies aktiv. Einzige Chance den simulierten Shelly zu behalten ist derzeit beim Cloudservice zu bleiben. Ich gehe aber optimistisch davon aus, dass die Funktionalität
+noch angeglichen wird und man auch lokal die URL selbst vergeben kann.
 
 
 
