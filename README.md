@@ -107,6 +107,15 @@ Die URL ist beim Standardnamen der HA Instanz "http://homeassistant.local:1880/e
 
 ### Konfiguration für den Maxxicharge anpassen
 
+In allen aktuellen Firmware Versionen (bis 0.41Beta) kann man den Pfad zum Shelly nur in der Cloudservice Oberfläche https://maxxisun.app/ pflegen. 
+
+**Hinweis für Nutzer des lokalen API bei Firmware 0.41beta:** Wer (wie ich) 0.41beta mit lokalem API (ohne Cloudservice) nutzt, muss zunächst das Lokale API auf http://maxxi.local abschalten und den Cloud-Service wieder einschalten. Für alle anderen entfällt dieser Schritt.
+
+Damit die "Shelly Simulation" genutzt werden kann, muss
+a) Als "Messgeräte-Typ" der "Shelly 3EM Pro" ausgewählt werden
+b) In Feld "Messgerät-IP" die (an den Namen der eignene HA Instanz angepasste Tei-URL) z.B. "homeassistant1.local:1880/endpoint" eingetragen werden. Die CCU ergänzt dies dann zur korrekten URL für das API.
+
+**Hinweis für Nutzer des lokalen API bei Firmware 0.41beta:** 
 
 
 
