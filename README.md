@@ -69,6 +69,33 @@ Schritte dazu:
 ```
 4. Den Beispielflow anpassen
 
+![Test](Shelly-Simulation1.JPG)
+
+**Vorab:** Das ist mein erster (richtiger) Flow in Node-RED - ich bitte alle Profis um Nachsicht und nehme gerne Verbesserungen per Issue oder PR an.
+
+Der "obere" Flow stellt das REST-API mit dem Shelly Pro 3EM Endpunkt "http://<Shelly-IP>/rpc/Shelly.GetStatus bereit. Die CCU benötigt von dem umfangreichen JSON, dass der Shelly liefert, nur exact einen Wert, nämlich (wenig überraschend) den aktuellen Gesamtverbrauch:
+```
+{
+     "em:0": {
+        "total_act_power": 100
+    }
+}
+```
+Der von der CCU Firmware verwendete JSON-Parser braucht das Feld an der "richtigen" Stelle der Struktur, alles andere wird (wie bei JSON erwartet) ignoriert.
+
+Am "oberen" Flow muss nichts angepasst werden. 
+
+Der "untere" Flow stellt den aktuellen Verbrauchswert als Zahl aus der entsprechenden HA Entität bereit. Bei meinem Zähler ist das "sensor.stromdd3_sm_16_7_0" - doppel-click auf den ersten Node erlaubt die Änderung des Sensors, ebenso wie die Frequenz in der die Daten vom Sensor geholt werden. 
+
+**Wichtig:** Hier muss natürlich der richtige Sensor stehen.
+
+Die beiden "debug" nodes sind standardmässig deaktiviert, helfen aber bei der Problemsuche wenn was nicht klappt. Bei "unteren" Flow sieht man im Debug, ob überhaupt Zählerwerte gefunden und angeliefert werden. Beim "oberen" Flow muss das API per "GET" unter des ensprechenden URL aufgerufen werden und liefert dann das JSON zurück.
+Die URL ist beim Standardnamen der HA Instanz "http://homeassistant.local:1880/endpoint/rpc/Shelly.GetStatus" und funktioniert auch im Browser.
+
+### Konfiguration für den Maxxicharge anpassen
+
+
+
 
 
 
