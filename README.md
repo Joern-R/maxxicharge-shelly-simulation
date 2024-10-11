@@ -51,11 +51,19 @@ dass selbst ge-scriptet oder sogar programmiert werden muss.
 
 ### Zählerdaten vom Lesekopf in HA integrieren
 
+Die Integration eines Tasmota basierten optischen Lesekopfes in HA ist bereits in diverse YT Videos
+beschrieben. Da ich relevante Komponenten (MQTT Broker) bereits in HA installiert hatte und nutze
+funktionierte die Einbindung mit der bei meinem Lesekopf vorinstallierten Tasmota Version wie folgt:
 
-
-
-
-
+1. MQTT Broker (Mosqitto) ist als Add-On in HA installiert.
+2. User/Passwort für den Zugriff auf MQTT ist in HA Benutzerverwaltung (bei mir als lokaler Nutzer) angelegt
+3. Die IP Adresse des Brokers (der HA Instanz) und User/PW wird in der Tasmota Oberfläche des Lesekopfes
+   eingetragen (nachdem der Lesekopf vorher ins WLAN eingebunden wurde)
+   MQTT wird in Tasmota Konfiguration aktiviert.
+5. HA findet nach Sichern der Daten den Lesekopf als neue "Tasmota" Integration - bei mir taucht das Gerät
+   nicht unter MQTT auf - sondern nur dort.
+6. Nun gilt es den richtigen Sensor für die Gesamtleistung zu finden und zu prüfen, ob dieser auch plausible
+   Werte liefert. Ist der Sensor identifiziert gehts mit dem nächsten Abschnitt weiter.
 
 ### Zählerwert (Leistung) im Shelly API Format bereitstellen
 
