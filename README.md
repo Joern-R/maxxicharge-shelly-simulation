@@ -52,6 +52,11 @@ dass selbst ge-scriptet oder sogar programmiert werden muss.
 ### Zählerdaten vom Lesekopf in HA integrieren
 
 
+
+
+
+
+
 ### Zählerwert (Leistung) im Shelly API Format bereitstellen
 
 Die eigentliche Funktionaliät habe ich auf Homeassistant über das "Node-RED" add-on realisiert. Vielleicht
