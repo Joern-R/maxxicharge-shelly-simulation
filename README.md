@@ -47,6 +47,27 @@ dass selbst ge-scriptet oder sogar programmiert werden muss.
   **Hardware:** Keine Empfehlung von mir. Ich nutze selbst ein fertiges System von NabuCasa, da ich kein
   Hardwarebastler bin.
 
+## Homeassistant Konfiguration
+
+### Zählerdaten vom Lesekopf in HA integrieren
+
+
+### Zählerwert (Leistung) im Shelly API Format bereitstellen
+
+Die eigentliche Funktionaliät habe ich auf Homeassistant über das "Node-RED" add-on realisiert. Vielleicht
+geht es auch anders - dann bitte entsprechende Infos per PR oder GitHub Issue ergänzen.
+
+Schritte dazu:
+1. "Node-RED" add-on bei den offizielle HA Add-ons in den Einstellungen laden
+   Hinweis: Ich musste in der Konfiguration des Add-ons noch "SSL" ausschalten - ansonsten habe ich
+   die Standardeinstellungen so gelassen.
+2. "Node-RED" Starten,.... - zur Oberfläche wechseln
+3. Den Beispielflow (unten) importieren
+
+```
+[{"id":"1d0d7f5a29f74393","type":"tab","label":"Simulate Shelly 3EM Pro - Power","disabled":false,"info":"","env":[]},{"id":"595e47ef9d7445d9","type":"http in","z":"1d0d7f5a29f74393","name":"Shelly Get Status URL","url":"/rpc/Shelly.GetStatus","method":"get","upload":false,"swaggerDoc":"","x":180,"y":100,"wires":[["9d6ab5b1a9d67936"]]},{"id":"5e824c09df4b32ce","type":"http response","z":"1d0d7f5a29f74393","name":"response","statusCode":"","headers":{},"x":1440,"y":100,"wires":[]},{"id":"9d6ab5b1a9d67936","type":"template","z":"1d0d7f5a29f74393","name":"JSON Payload Template","field":"payload","fieldType":"msg","format":"json","syntax":"mustache","template":"{\n     \"em:0\": {\n        \"total_act_power\": 100\n    }\n}","output":"json","x":470,"y":100,"wires":[["dc090c718f915bbb"]]},{"id":"646d5004d980f536","type":"debug","z":"1d0d7f5a29f74393","name":"debug 1","active":false,"tosidebar":true,"console":true,"tostatus":true,"complete":"payload","targetType":"msg","statusVal":"payload","statusType":"auto","x":1450,"y":200,"wires":[]},{"id":"be5c7e35714cf1fd","type":"change","z":"1d0d7f5a29f74393","name":"Leistungswert übernehmen","rules":[{"t":"set","p":"power","pt":"flow","to":"payload","tot":"msg"}],"action":"","property":"","from":"","to":"","reg":false,"x":480,"y":300,"wires":[["1c867c9b21f87b25"]]},{"id":"b265dd264a02820f","type":"poll-state","z":"1d0d7f5a29f74393","name":"Stromzähler ablesen","server":"eeb0c6a6.8128e8","version":3,"exposeAsEntityConfig":"","updateInterval":"1","updateIntervalType":"num","updateIntervalUnits":"seconds","outputInitially":false,"outputOnChanged":false,"entityId":"sensor.stromdd3_sm_16_7_0","stateType":"num","ifState":"","ifStateType":"str","ifStateOperator":"is","outputs":1,"outputProperties":[{"property":"payload","propertyType":"msg","value":"","valueType":"entityState"},{"property":"data","propertyType":"msg","value":"","valueType":"entity"},{"property":"topic","propertyType":"msg","value":"","valueType":"triggerId"}],"x":170,"y":300,"wires":[["be5c7e35714cf1fd"]]},{"id":"1c867c9b21f87b25","type":"debug","z":"1d0d7f5a29f74393","name":"debug 2","active":false,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","statusVal":"","statusType":"auto","x":760,"y":300,"wires":[]},{"id":"dc090c718f915bbb","type":"json","z":"1d0d7f5a29f74393","name":"Payload in JS Objekt umwandeln","property":"payload","action":"obj","pretty":false,"x":780,"y":100,"wires":[["176b4b0c29b8ce48"]]},{"id":"176b4b0c29b8ce48","type":"change","z":"1d0d7f5a29f74393","name":"","rules":[{"t":"set","p":"payload[\"em:0\"].total_act_power","pt":"msg","to":"power","tot":"flow"}],"action":"","property":"","from":"","to":"","reg":false,"x":1130,"y":100,"wires":[["646d5004d980f536","5e824c09df4b32ce"]]},{"id":"eeb0c6a6.8128e8","type":"server","name":"Home Assistant","addon":true,"rejectUnauthorizedCerts":true,"ha_boolean":"","connectionDelay":false,"cacheJson":false,"heartbeat":false,"heartbeatInterval":"","statusSeparator":"","enableGlobalContextStore":false}]
+```
+4. Den Beispielflow anpassen
 
 
 
